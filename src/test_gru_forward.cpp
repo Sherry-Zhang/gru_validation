@@ -12,14 +12,6 @@
 #include <iostream>
 #include "utils.hpp"
 using namespace std;
-int load_json(std::map<std::string, std::string> &data_map, const char* file_path);
-void split(std::vector<std::string> &out, std::string &str, std::string delim);
-
-
-template <typename data_t>
-inline data_t sigmoid(data_t x) {
-    return 1.0f / (1.0f + exp(-x));
-}
 template <typename data_t>
 void grucell_fwd(const int T,
                  const int N,
@@ -35,12 +27,6 @@ void grucell_fwd(const int T,
     const data_t *wh = wx + I * H * 3;
     const data_t *bx = wh + H * H * 3;
     const data_t *bh = bx + H * 3;
-    //printf("weights\n");
-    //print(wx, 1, I, H * 3);
-    //print(wh, 1, H, H * 3);
-    //print(bx, 1, 1, H * 3);
-    //print(bh, 1, 1, H * 3);
-
     //need workspace to save [rt|zt|nt], size:[N, 3H]
     const int col = H * 3;
     data_t *buf = new data_t[N * col];
@@ -103,8 +89,6 @@ void grucell_fwd(const int T,
     }
     delete []buf;
     delete []hbuf;
-    //print(y, T, N, H);
-    //print(hy, 1, N, H);
 }
 
 /**
@@ -168,7 +152,7 @@ void compute_ref_gru_fwd(
 
 int main(int argc, char* argv[])
 {
-    const char* file_path = "../tmp/gru_forward.json";
+    const char* file_path = "../tmp/gru.json";
     std::map<std::string, std::string> data_map;
     load_json(data_map, file_path);
     const int T = atoi(data_map["seq_length"].c_str()); 

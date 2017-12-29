@@ -10,11 +10,11 @@ do
     size_str=${size//,/ }
     # gru.py param: size, num layer, bidirectional
     python gru.py $size_str 1 False
-    ../build/gru_forward_validation
+    ../build/gru_backward_validation
     python gru.py $size_str 1 True
-    ../build/gru_forward_validation
+    ../build/gru_backward_validation
     python gru.py $size_str 3 False
-    ../build/gru_forward_validation
+    ../build/gru_backward_validation
     python gru.py $size_str 3 True
-    ../build/gru_forward_validation
+    ../build/gru_backward_validation
 done

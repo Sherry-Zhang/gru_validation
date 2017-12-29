@@ -42,4 +42,9 @@ void gemm(const int transA, const int transB, const data_t *A,
         }
     }
 }
+
+template <typename data_t>
+inline data_t sigmoid(data_t x) {
+    return 1.0f / (1.0f + exp(-x));
+}
 #endif // UTILS_HPP
